@@ -1,0 +1,85 @@
+{
+    "scoring": [
+      { "name": "Mary(1)", "math": 75, "english": 92, "music": 88, "sport": 76 },
+      { "name": "John(2)", "math": 82, "english": 85, "music": 90, "sport": 80 },
+      { "name": "Alice(3)", "math": 78, "english": 88, "music": 85, "sport": 79 },
+      { "name": "Bob(4)", "math": 90, "english": 80, "music": 87, "sport": 85 },
+      { "name": "Cathy(5)", "math": 85, "english": 89, "music": 92, "sport": 88 },
+      { "name": "David(6)", "math": 76, "english": 84, "music": 80, "sport": 77 },
+      { "name": "Eva(7)", "math": 88, "english": 91, "music": 86, "sport": 82 },
+      { "name": "Frank(8)", "math": 79, "english": 87, "music": 89, "sport": 81 },
+      { "name": "Grace(9)", "math": 92, "english": 90, "music": 91, "sport": 90 },
+      { "name": "Henry(10)", "math": 81, "english": 83, "music": 84, "sport": 78 },
+      { "name": "Ivy(11)", "math": 77, "english": 86, "music": 82, "sport": 75 },
+      { "name": "Jack(12)", "math": 84, "english": 88, "music": 85, "sport": 83 },
+      { "name": "Karen(13)", "math": 89, "english": 92, "music": 90, "sport": 87 },
+      { "name": "Leo(14)", "math": 80, "english": 85, "music": 83, "sport": 79 },
+      { "name": "Mona(15)", "math": 91, "english": 89, "music": 88, "sport": 86 },
+      { "name": "Nick(16)", "math": 78, "english": 84, "music": 81, "sport": 76 },
+      { "name": "Olivia(17)", "math": 87, "english": 90, "music": 89, "sport": 85 },
+      { "name": "Paul(18)", "math": 82, "english": 87, "music": 86, "sport": 80 },
+      { "name": "Quincy(19)", "math": 75, "english": 83, "music": 80, "sport": 74 },
+      { "name": "Rachel(20)", "math": 88, "english": 91, "music": 87, "sport": 82 },
+      { "name": "Sam(21)", "math": 79, "english": 85, "music": 84, "sport": 78 },
+      { "name": "Tina(22)", "math": 90, "english": 88, "music": 89, "sport": 86 },
+      { "name": "Uma(23)", "math": 81, "english": 87, "music": 85, "sport": 80 },
+      { "name": "Victor(24)", "math": 77, "english": 84, "music": 82, "sport": 75 },
+      { "name": "Wendy(25)", "math": 85, "english": 89, "music": 88, "sport": 83 },
+      { "name": "Xander(26)", "math": 89, "english": 91, "music": 90, "sport": 87 },
+      { "name": "Yvonne(27)", "math": 80, "english": 86, "music": 84, "sport": 79 },
+      { "name": "Zack(28)", "math": 92, "english": 90, "music": 91, "sport": 88 },
+      { "name": "Amy(29)", "math": 78, "english": 85, "music": 83, "sport": 77 },
+      { "name": "Brian(30)", "math": 87, "english": 88, "music": 86, "sport": 82 }
+    ],
+    "ratio": [
+      {
+        "class": "A",
+        "Taiwanese": 15,
+        "Korean": 12,
+        "Japanese": 8,
+        "American": 6
+      },
+      {
+        "class": "B",
+        "Taiwanese": 7,
+        "Korean": 15,
+        "Japanese": 13,
+        "American": 8
+      },
+      {
+        "class": "C",
+        "Taiwanese": 10,
+        "Korean": 11,
+        "Japanese": 8,
+        "American": 11
+      },
+      { "class": "D", "Taiwanese": 9, "Korean": 8, "Japanese": 9, "American": 7 },
+      {
+        "class": "E",
+        "Taiwanese": 16,
+        "Korean": 10,
+        "Japanese": 11,
+        "American": 6
+      },
+      {
+        "class": "F",
+        "Taiwanese": 8,
+        "Korean": 20,
+        "Japanese": 16,
+        "American": 2
+      }
+    ],
+    "headcount": [
+      { "year": 2015, "count": 588 },
+      { "year": 2016, "count": 593 },
+      { "year": 2017, "count": 615 },
+      { "year": 2018, "count": 520 },
+      { "year": 2019, "count": 499 },
+      { "year": 2020, "count": 473 },
+      { "year": 2021, "count": 456 },
+      { "year": 2022, "count": 420 },
+      { "year": 2023, "count": 411 },
+      { "year": 2024, "count": 390 }
+    ]
+  }
+  
