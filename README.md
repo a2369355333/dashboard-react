@@ -1,4 +1,4 @@
-[點擊這裡查看網站_School_Dashboard](https://a2369355333.github.io/dashboard-react/)
+[點擊這裡查看網站_School-Dashboard](https://a2369355333.github.io/dashboard-react/)
 
 專案名稱: School Dashboard <br>
 圖表: <br>
