@@ -8,8 +8,9 @@
 <br>
 產生報告特點: <br>
 1.將每個圖表匯集成一個 Power Point檔案 <br>
-2.採用螢幕截圖 <br>
+2.採用螢幕截圖，所以必須導入到每個分頁去做截圖 <br>
 3.Table採用滾軸分段式，主要以canvas裁切拼湊出每一個分頁 <br>
+(設計每一頁為8列，可客製化) <br>
 <br>
 <img width="751" alt="image" src="https://github.com/user-attachments/assets/571ff940-d4af-4a28-89a7-e72f66a40bab">
 <img width="975" alt="image" src="https://github.com/user-attachments/assets/e3558c39-d0f1-4a1f-90ac-053235f014a7">
