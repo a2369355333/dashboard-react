@@ -2,9 +2,9 @@
 
 專案名稱: School Dashboard 
 圖表: 
-1.Scoring: 學生成績 
-2.Ratio: 同學不同國家分配比例 
-3.Headcount: 每年學校招生人數
+1.Scoring:學生成績 
+2.Ratio:同學不同國家分配比例 
+3.Headcount:每年學校招生人數
 <img width="751" alt="image" src="https://github.com/user-attachments/assets/571ff940-d4af-4a28-89a7-e72f66a40bab">
 <img width="975" alt="image" src="https://github.com/user-attachments/assets/e3558c39-d0f1-4a1f-90ac-053235f014a7">
 <img width="733" alt="image" src="https://github.com/user-attachments/assets/fedc0de4-ad11-48fd-b7c8-10c3fd54df49">
