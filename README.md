@@ -12,10 +12,10 @@
 3.Table採用滾軸分段式，主要以canvas裁切拼湊出每一個分頁 <br>
 (設計每一頁為8列，可客製化) <br>
 <br>
-<img width="751" alt="image" src="https://github.com/user-attachments/assets/571ff940-d4af-4a28-89a7-e72f66a40bab">
+<img width="975" alt="image" src="https://github.com/user-attachments/assets/571ff940-d4af-4a28-89a7-e72f66a40bab">
 <img width="975" alt="image" src="https://github.com/user-attachments/assets/e3558c39-d0f1-4a1f-90ac-053235f014a7">
-<img width="733" alt="image" src="https://github.com/user-attachments/assets/fedc0de4-ad11-48fd-b7c8-10c3fd54df49">
-<img width="871" alt="image" src="https://github.com/user-attachments/assets/9b18d355-7fbc-4a88-9903-130aff06b636">
+<img width="975" alt="image" src="https://github.com/user-attachments/assets/fedc0de4-ad11-48fd-b7c8-10c3fd54df49">
+<img width="975" alt="image" src="https://github.com/user-attachments/assets/9b18d355-7fbc-4a88-9903-130aff06b636">
 
 
 
