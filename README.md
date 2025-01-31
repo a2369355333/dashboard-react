@@ -1,11 +1,12 @@
 [點擊這裡查看網站_School-Dashboard](https://a2369355333.github.io/dashboard-react/)
 
 <h3>專案名稱: School Dashboard</h3>
-__圖表:__<br>
+<h4>圖表:</h4>
 1.Scoring:學生成績 <br>
 2.Ratio:同學不同國家分配比例 <br>
 3.Headcount:每年學校招生人數 <br>
-產生報告特點:<br>
+<br>
+<h4>產生報告特點:</h4>
 1.將每個圖表匯集成一個 Power Point檔案 <br>
 2.採用螢幕截圖，所以必須導入到每個分頁去做截圖 <br>
 3.Table採用滾軸分段式，主要以canvas裁切拼湊出每一個分頁 <br>
