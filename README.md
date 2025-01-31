@@ -1,6 +1,6 @@
 [點擊這裡查看網站_School-Dashboard](https://a2369355333.github.io/dashboard-react/)
 
-專案名稱: School Dashboard <br>
+<h3>專案名稱: School Dashboard</h3>
 圖表: <br>
 1.Scoring:學生成績 <br>
 2.Ratio:同學不同國家分配比例 <br>
