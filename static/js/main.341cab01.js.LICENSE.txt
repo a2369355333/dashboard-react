@@ -11,9 +11,8 @@ https://github.com/nodeca/pako/blob/main/LICENSE
 */
 
 /*!
- * ApexCharts v3.43.0
- * (c) 2018-2023 ApexCharts
- * Released under the MIT License.
+ * ApexCharts v5.3.6
+ * (c) 2018-2025 ApexCharts
  */
 
 /*!
@@ -21,6 +20,28 @@ https://github.com/nodeca/pako/blob/main/LICENSE
  * Copyright (c) 2022 Niklas von Hertzen <https://hertzen.com>
  * Released under MIT License
  */
+
+/*!
+* @svgdotjs/svg.resize.js - An extension for svg.js which allows to resize elements which are selected
+* @version 2.0.4
+* https://github.com/svgdotjs/svg.resize.js
+*
+* @copyright [object Object]
+* @license MIT
+*
+* BUILT: Fri Sep 13 2024 12:43:14 GMT+0200 (Central European Summer Time)
+*/
+
+/*!
+* @svgdotjs/svg.select.js - An extension of svg.js which allows to select elements with mouse
+* @version 4.0.1
+* https://github.com/svgdotjs/svg.select.js
+*
+* @copyright Ulrich-Matthias Schäfer
+* @license MIT
+*
+* BUILT: Mon Jul 01 2024 15:04:42 GMT+0200 (Central European Summer Time)
+*/
 
 /*! *****************************************************************************
   Copyright (c) Microsoft Corporation.
@@ -34,14 +55,6 @@ https://github.com/nodeca/pako/blob/main/LICENSE
   OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
   PERFORMANCE OF THIS SOFTWARE.
   ***************************************************************************** */
-
-/*! svg.draggable.js - v2.2.2 - 2019-01-08
-* https://github.com/svgdotjs/svg.draggable.js
-* Copyright (c) 2019 Wout Fierens; Licensed MIT */
-
-/*! svg.filter.js - v2.0.2 - 2016-02-24
-* https://github.com/wout/svg.filter.js
-* Copyright (c) 2016 Wout Fierens; Licensed MIT */
 
 /**
  * @license React
