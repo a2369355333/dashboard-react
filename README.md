@@ -12,7 +12,7 @@ yarn
 yarn start
 ```
 
-## Deploy on github
+## Deploy on GitHub
 Project URL: [https://a2369355333.github.io/dashboard-react/](https://a2369355333.github.io/dashboard-react/)
 
 
