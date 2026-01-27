@@ -1,31 +1,80 @@
 import { useState, useMemo, useEffect, useRef } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
+import { ColDef, GridReadyEvent } from "ag-grid-community";
 import data from "../../data/data.json";
-import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import Loading from "../../components/loading";
 import { useLoading } from "../../provider/loading-provider";
 import { captureScoringImages, delay } from "../../service/capture";
 
-const Scoring = () => {
-  const scoringData = data.scoring;
+// ----- Type definitions -----
+interface ScoringItem {
+  name: string;
+  math: number;
+  english: number;
+  music: number;
+  sport: number;
+}
+
+interface Row1Type {
+  name: string;
+  math: number;
+  english: number;
+}
+
+interface Row2Type {
+  name: string;
+  music: number;
+  sport: number;
+}
+
+interface Row3Type extends ScoringItem { }
+
+interface ScreenshotInfo {
+  scoring: string[];
+  ratio: string[];
+  headcount: string[];
+}
+
+
+// -------------------
+
+const Scoring: React.FC = () => {
+  // ----- State & references -----
+  const scoringData: ScoringItem[] = data.scoring;
   const rowHeight = 50;
+
   const { isLoading, screenshotInfo, setScreenshotInfo } = useLoading();
-  const domRef = {personal: useRef(), raw: useRef()};
-  const gridRef = useRef();
-  const onGridReady = (params) => {gridRef.current = params.api;}
+
+  // DOM references for screenshots
+  const domRef = {
+    personal: useRef<HTMLDivElement>(null),
+    raw: useRef<HTMLDivElement>(null),
+  };
+
+  // Grid API reference
+  const gridRef = useRef<any>(null);
+
   const navigate = useNavigate();
   const location = useLocation();
-  const navigateList = useMemo(
+
+  // Navigation list passed from state
+  const navigateList: string[] = useMemo(
     () => location?.state?.navigateList || [],
     [location?.state]
   );
 
-  const row1 = [  
+  // ----- Grid Ready -----
+  const onGridReady = (params: GridReadyEvent) => {
+    gridRef.current = params.api;
+  };
+
+  // ----- Prepare row data -----
+  const row1: Row1Type[] = [
     {
       name: scoringData[0].name,
       math: scoringData[0].math,
@@ -43,7 +92,7 @@ const Scoring = () => {
     },
   ];
 
-  const row2 = [
+  const row2: Row2Type[] = [
     {
       name: scoringData[0].name,
       music: scoringData[0].music,
@@ -61,51 +110,54 @@ const Scoring = () => {
     },
   ];
 
-  const row3 = scoringData;
+  const row3: Row3Type[] = scoringData;
 
-  const col1 = [
+  // ----- Prepare column definitions -----
+  const col1: ColDef<Row1Type>[] = [
     { headerName: "\u200B", field: "name", flex: 1 },
     {
       headerName: "Math",
       field: "math",
       flex: 1,
       cellStyle: (params) =>
-        params.data.name === "AVG_SCORE"
+        params.data?.name === "AVG_SCORE"
           ? { color: "red", backgroundColor: "lightblue" }
-          : null,
+          : undefined,
     },
     {
       headerName: "English",
       field: "english",
       flex: 1,
       cellStyle: (params) =>
-        params.data.name === "AVG_SCORE"
+        params.data?.name === "AVG_SCORE"
           ? { color: "red", backgroundColor: "lightblue" }
-          : null,
+          : undefined,
     },
   ];
-  const col2 = [
+
+  const col2: ColDef<Row2Type>[] = [
     { headerName: "\u200B", field: "name", flex: 1 },
     {
       headerName: "Music",
       field: "music",
       flex: 1,
       cellStyle: (params) =>
-        params.data.name === "AVG_SCORE"
+        params.data?.name === "AVG_SCORE"
           ? { color: "red", backgroundColor: "lightblue" }
-          : null,
+          : undefined,
     },
     {
       headerName: "Sport",
       field: "sport",
       flex: 1,
       cellStyle: (params) =>
-        params.data.name === "AVG_SCORE"
+        params.data?.name === "AVG_SCORE"
           ? { color: "red", backgroundColor: "lightblue" }
-          : null,
+          : undefined,
     },
   ];
-  const col3 = [
+
+  const col3: ColDef<Row3Type>[] = [
     { headerName: "\u200B", field: "name", flex: 1 },
     { headerName: "Math", field: "math", flex: 1 },
     { headerName: "English", field: "english", flex: 1 },
@@ -113,30 +165,43 @@ const Scoring = () => {
     { headerName: "Sport", field: "sport", flex: 1 },
   ];
 
-  //process PPT images
-  const handleReport = async() => {
+  // ----- Capture screenshots -----
+  const handleReport = async () => {
     await delay(1000);
-    const images = await captureScoringImages(gridRef, domRef.personal, domRef.raw);
-    setScreenshotInfo((pre) => ({...pre, scoring: images}));
-    navigate(navigateList[0], {
-        state: {
-            navigateList: navigateList.slice(1) 
-        },
-        replace: true,
-    })
-  }
 
+    const images = await captureScoringImages(
+      gridRef,
+      domRef.personal,
+      domRef.raw
+    );
+
+    setScreenshotInfo((prev: ScreenshotInfo) => ({
+      ...prev,
+      scoring: images,
+    }));
+
+    if (navigateList.length > 0) {
+      navigate(navigateList[0], {
+        state: { navigateList: navigateList.slice(1) },
+        replace: true,
+      });
+    }
+  };
+
+  // Trigger report generation when loading
   useEffect(() => {
     if (isLoading) {
-        handleReport();
+      handleReport();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading]);
-  
 
+  // ----- Render -----
   return (
     <div>
       {isLoading && <Loading />}
       <div className="ag-theme-alpine relative w-full flex flex-col justify-center items-center">
+        {/* Back button */}
         <div className="absolute top-4 left-4">
           <Link to="/">
             <Button
@@ -148,37 +213,44 @@ const Scoring = () => {
             </Button>
           </Link>
         </div>
-        <div ref={domRef.personal} className="w-full flex flex-col justify-center items-center">
+
+        {/* Personal score tables */}
+        <div
+          ref={domRef.personal}
+          className="w-full flex flex-col justify-center items-center"
+        >
           <span className="text-3xl my-10">Final Test Scoring</span>
           <div className="flex space-x-5">
             <div className="w-[600px]">
-              <AgGridReact
+              <AgGridReact<Row1Type>
                 domLayout="autoHeight"
                 rowHeight={rowHeight}
                 headerHeight={rowHeight}
                 rowData={row1}
                 columnDefs={col1}
-              ></AgGridReact>
+              />
             </div>
             <div className="w-[600px]">
-              <AgGridReact
+              <AgGridReact<Row2Type>
                 domLayout="autoHeight"
                 rowHeight={rowHeight}
                 headerHeight={rowHeight}
                 rowData={row2}
                 columnDefs={col2}
-              ></AgGridReact>
+              />
             </div>
           </div>
         </div>
+
+        {/* Raw score table */}
         <div ref={domRef.raw} className="w-[1220px] h-[450px] mt-10">
-          <AgGridReact
+          <AgGridReact<Row3Type>
             rowHeight={rowHeight}
             headerHeight={rowHeight}
             rowData={row3}
             columnDefs={col3}
             onGridReady={onGridReady}
-          ></AgGridReact>
+          />
         </div>
       </div>
     </div>

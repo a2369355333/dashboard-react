@@ -1,60 +1,96 @@
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import { useState, useMemo, useEffect, useRef } from "react";
 import Chart from "react-apexcharts";
+import { ApexOptions } from "apexcharts"; 
 import data from "../../data/data.json";
-import { Link } from "react-router-dom";
 import { Button, MenuItem, Select, FormControl } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import Loading from "../../components/loading";
 import { useLoading } from "../../provider/loading-provider";
 import { domToCanvas, delay } from "../../service/capture";
 
-const Ratio = () => {
-  const ratioData = data.ratio;
-  const [selectedClass, setSelectedClass] = useState("");
-  const [selectedChartData, setSelectedChartData] = useState(null);
-  const { isLoading, screenshotInfo, setScreenshotInfo } = useLoading();
-  const domRef = useRef();
+// ----- Type definitions -----
+interface RatioItem {
+  class: string;
+  Taiwanese: number;
+  Korean: number;
+  Japanese: number;
+  American: number;
+}
+
+interface ChartData {
+  class: string;
+  options: ApexOptions;
+  series: number[];
+}
+
+interface ScreenshotInfo {
+  scoring: string[];
+  ratio: string[];
+  headcount: string[];
+}
+
+// -------------------
+
+const Ratio: React.FC = () => {
+  const ratioData: RatioItem[] = data.ratio;
+  const [selectedClass, setSelectedClass] = useState<string>("");
+  const [selectedChartData, setSelectedChartData] = useState<ChartData | null>(null);
+  const { isLoading, setIsLoading, screenshotInfo, setScreenshotInfo } = useLoading();
+  const domRef = useRef<HTMLDivElement | null>(null);
   const navigate = useNavigate();
   const location = useLocation();
-  const navigateList = useMemo(
+
+  // Get the navigation list from the location state
+  const navigateList: string[] = useMemo(
     () => location?.state?.navigateList || [],
     [location?.state]
   );
-  const chartData = ratioData.map((item) => ({
-    class: item.class,
-    options: {
-      chart: {
-        type: "pie",
-      },
-      labels: ["Taiwanese", "Korean", "Japanese", "American"],
-      title: {
-        text: `Class ${item.class}`,
-        align: "left",
-      },
-    },
-    series: [item.Taiwanese, item.Korean, item.Japanese, item.American],
-  }));
 
+  // Map ratio data to chart data for ApexCharts
+  const chartData: ChartData[] = useMemo(() => 
+    ratioData.map((item) => ({
+      class: item.class,
+      options: {
+        chart: {
+          type: "pie",
+        },
+        labels: ["Taiwanese", "Korean", "Japanese", "American"],
+        title: {
+          text: `Class ${item.class}`,
+          align: "left",
+        },
+      },
+      series: [item.Taiwanese, item.Korean, item.Japanese, item.American],
+    })), [ratioData]
+  );
+
+  // Initialize the selected class to the first class in data
   useEffect(() => {
-    setSelectedClass(ratioData[0].class);
-  }, []);
+    if (ratioData.length > 0 && !selectedClass) {
+      setSelectedClass(ratioData[0].class);
+    }
+  }, [ratioData, selectedClass]);
 
+  // Update the selected chart when selectedClass changes
   useEffect(() => {
     const currentChartData = chartData.find(
-      (chartData) => chartData.class === selectedClass
+      (data) => data.class === selectedClass
     );
-    setSelectedChartData(currentChartData || null);
-  }, [selectedClass]);
+    if (currentChartData) {
+      setSelectedChartData(currentChartData);
+    }
+  }, [selectedClass, chartData]);
 
-  //process PPT images
-  const captureRatioImages = async (domRef) => {
+  // Capture screenshots for each class chart
+  const captureRatioImages = async (domRef: React.RefObject<HTMLDivElement | null>) => {
+    if (!domRef.current) return [];
     const table = domRef.current;
-    let images = [];
+    const images: string[] = [];
 
     for (let i = 0; i < chartData.length; i++) {
       setSelectedClass(ratioData[i].class);
-      setSelectedChartData(chartData[i])
+      setSelectedChartData(chartData[i]);
       await delay(500);
       const canvas = await domToCanvas(table);
       const image = canvas.toDataURL("image/png");
@@ -64,24 +100,29 @@ const Ratio = () => {
     return images;
   };
 
+  // Handle report generation
   const handleReport = async () => {
     await delay(1000);
     const images = await captureRatioImages(domRef);
 
-    setScreenshotInfo((pre) => ({...pre, ratio: images}));
+    setScreenshotInfo((prev: ScreenshotInfo) => ({ ...prev, ratio: images }));
 
-    navigate(navigateList[0], {
-      state: {
-        navigateList: navigateList.slice(1),
-      },
-      replace: true,
-    });
+    if (navigateList.length > 0) {
+      navigate(navigateList[0], {
+        state: {
+          navigateList: navigateList.slice(1),
+        },
+        replace: true,
+      });
+    }
   };
 
+  // Trigger report generation when loading
   useEffect(() => {
     if (isLoading) {
       handleReport();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading]);
 
   return (
@@ -113,9 +154,9 @@ const Ratio = () => {
                 backgroundColor: "white",
               }}
             >
-              {chartData.map((chartData, idx) => (
-                <MenuItem key={idx} value={chartData.class}>
-                  Class {chartData.class}
+              {chartData.map((data, idx) => (
+                <MenuItem key={idx} value={data.class}>
+                  Class {data.class}
                 </MenuItem>
               ))}
             </Select>
